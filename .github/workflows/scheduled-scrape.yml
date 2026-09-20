@@ -1,0 +1,21 @@
+# Backup scheduler. cron-job.org is the primary trigger; this is a safety net
+# in case that service is down. Set CRON_URL and CRON_SECRET as repo secrets.
+name: Scheduled scrape
+
+on:
+  schedule:
+    - cron: '15 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a scrape cycle
+        run: |
+          curl -sS --fail-with-body -X POST "$CRON_URL" \
+            -H "x-cron-secret: $CRON_SECRET" \
+            --max-time 120 | head -c 2000
+        env:
+          CRON_URL: ${{ secrets.CRON_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
