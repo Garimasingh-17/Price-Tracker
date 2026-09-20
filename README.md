@@ -4,9 +4,6 @@ Tracks prices and stock on INE's mock storefront (`https://demo.inelabteamdev.co
 on a fixed schedule, and keeps an honest record of every scrape attempt —
 including the ones that failed.
 
-- **Live site:** _add your Vercel URL_
-- **API:** _add your Render URL_
-- **Headed run recording:** _add your video link_
 
 | Piece | Tech | Host |
 |---|---|---|
